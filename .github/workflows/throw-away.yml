@@ -13,5 +13,8 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
-      - name: Another example
-        run: echo HELLO
+      - name: Set up node.js
+        uses: actions/setup-node@v4
+
+      - name: Fetch data from github
+        run: npm run get-data

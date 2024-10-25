@@ -1,0 +1,7 @@
+{
+  "name": "github-workflows-test",
+  "private": true,
+  "scripts": {
+    "get-data": "node ./scripts/my-script.mjs"
+  }
+}
