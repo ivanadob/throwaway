@@ -1,0 +1,17 @@
+name: Throwaway workflow for testing stuff
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  stuff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Another example
+        run: echo HELLO
