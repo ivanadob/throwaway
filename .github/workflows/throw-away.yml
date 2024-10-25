@@ -7,14 +7,45 @@ on:
   workflow_dispatch:
 
 jobs:
-  stuff:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
       - name: Set up node.js
         uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Fetch data from github
-        run: npm run get-data
+        run: pnpm run get-data
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # if this was an Astro website, the build
+      # output we want to deploy, would live in
+      # the "dist" folder
+      - name: Build website
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -2,6 +2,7 @@
   "name": "github-workflows-test",
   "private": true,
   "scripts": {
+    "build": "mkdir dist && echo \"<h1>HELLO</h1>\" > dist/index.html",
     "get-data": "node ./scripts/my-script.mjs"
   }
 }
